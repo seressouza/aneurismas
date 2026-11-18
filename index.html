@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5A0F22">
+<meta name="description" content="Trilha de aprendizagem: aneurisma de aorta abdominal e reabilitação vascular.">
+<title>Além da Aula · Aorta e Reabilitação Vascular</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{
+  --navy:#5A0F22; --navy2:#7A1830; --cream:#F6F3EC; --paper:#FFFDF8; --ink:#14213D;
+  --muted:#5C6870; --line:#E2DCCD; --rust:#B5172E; --coral:#E0485A; --cyan:#F4B942; --blue:#0E6E78;
+  --ok:#1F6B35; --okbg:#E3F1E6; --bad:#B03A0A; --badbg:#FDECE2; --warnbg:#FFF6E0;
+  --r:16px;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--cream);color:var(--ink)}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+a{color:var(--blue)}
+button{font:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px}
+header.top{background:var(--navy);color:var(--cream);padding:calc(14px + env(safe-area-inset-top)) 0 14px;position:sticky;top:0;z-index:10}
+header.top .wrap{display:flex;align-items:center;gap:12px}
+header.top .back{background:none;border:0;color:var(--cream);font-size:22px;padding:4px 8px 4px 0;cursor:pointer;line-height:1}
+header.top .title{font-weight:700;font-size:16px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header.top .prog{font-size:13px;color:#F1D6DA;white-space:nowrap}
+.hero{background:var(--navy);color:var(--cream);padding:8px 0 28px}
+.hero h1{font-size:30px;line-height:1.12;margin:6px 0 10px;letter-spacing:-.01em}
+.hero p{color:#F1D6DA;margin:0 0 14px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F4B942}
+.ecg{display:block;width:100%;height:46px;margin:8px 0 4px}
+.ecg path{stroke:var(--cyan);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.4s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.ecg path{animation:none;stroke-dashoffset:0}}
+.bar{height:8px;background:rgba(255,255,255,.18);border-radius:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--coral);border-radius:8px;transition:width .4s}
+.barlabel{font-size:13px;color:#F1D6DA;margin-top:6px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 0}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 14px;border-radius:12px;border:0;background:var(--coral);color:#fff;font-weight:700;text-decoration:none;cursor:pointer;text-align:center}
+.btn.ghost{background:transparent;color:var(--cream);border:1.5px solid rgba(246,243,236,.5)}
+.btn.light{background:var(--paper);color:var(--navy);border:1.5px solid var(--line)}
+.btn.small{min-height:40px;font-size:14px;padding:8px 12px}
+main{padding:18px 0 calc(40px + env(safe-area-inset-bottom))}
+h2{font-size:22px;line-height:1.2;margin:22px 0 10px;color:var(--navy)}
+h3{font-size:18px;line-height:1.25;margin:0 0 8px;color:var(--navy)}
+.trail{list-style:none;margin:0;padding:0;position:relative}
+.trail:before{content:"";position:absolute;left:23px;top:24px;bottom:24px;width:3px;background:var(--line);border-radius:3px}
+.station{position:relative;display:flex;gap:14px;align-items:stretch;margin:0 0 12px;text-decoration:none;color:inherit}
+.dot{flex:0 0 48px;height:48px;border-radius:50%;background:var(--paper);border:3px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy);z-index:1;font-size:17px}
+.station.done .dot{background:var(--ok);border-color:var(--ok);color:#fff}
+.station.started .dot{border-color:var(--coral)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;flex:1}
+.station .card h3{margin:0 0 2px;font-size:17px}
+.station .card p{margin:0;color:var(--muted);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:12px;font-weight:600;background:#E2F2F3;color:var(--blue);border-radius:20px;padding:2px 9px}
+.chip.q{background:var(--badbg);color:var(--rust)}
+.chip.ok{background:var(--okbg);color:var(--ok)}
+.block{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:0 0 14px}
+.block p{margin:0 0 10px}.block p:last-child{margin-bottom:0}
+.block ul{margin:0 0 10px;padding-left:20px}.block li{margin-bottom:5px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rust);margin-bottom:6px;display:block}
+.kicker.blue{color:var(--blue)}
+.note{background:var(--warnbg);border:1px solid #EBC774;border-radius:12px;padding:12px 14px;font-size:14px;margin:0 0 14px}
+.quote{font-style:italic;font-size:18px;color:var(--navy);border-left:4px solid var(--coral);padding:4px 0 4px 14px;margin:6px 0 14px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:4px 0 6px}
+th{background:var(--navy);color:var(--cream);text-align:left;padding:8px;font-weight:600}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+.tablewrap{overflow-x:auto;margin:0 -4px}
+label{display:block;font-size:14px;font-weight:600;color:var(--navy);margin:10px 0 4px}
+input[type=number],select{width:100%;min-height:46px;font-size:17px;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+input:focus,select:focus{outline:3px solid rgba(14,110,120,.35);border-color:var(--cyan)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.out{margin-top:12px;background:var(--navy);color:var(--cream);border-radius:12px;padding:14px}
+.out .big{font-size:28px;font-weight:800;line-height:1.1;color:#fff}
+.out .lbl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#E8B4BC}
+.out p{margin:6px 0 0;color:#F1D6DA;font-size:14px}
+.outgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.seg button{flex:1 1 auto;min-height:44px;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;cursor:pointer;color:var(--ink);text-align:left}
+.seg button[aria-pressed=true]{border-color:var(--navy);background:var(--navy);color:#fff}
+.opts{display:grid;gap:8px;margin:10px 0}
+.opt{min-height:48px;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer;color:var(--ink)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--okbg)}
+.opt.wrong{border-color:var(--bad);background:var(--badbg)}
+.fb{border-radius:12px;padding:12px 14px;font-size:15px;margin-top:4px}
+.fb.ok{background:var(--okbg);color:#173F22}
+.fb.bad{background:var(--badbg);color:#5A1E05}
+.qhead{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:6px}
+.qtext{font-weight:700;font-size:17px;color:var(--navy)}
+.sortitem{display:flex;flex-direction:column;gap:6px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 8px;background:#fff}
+.sortitem .seg button{flex:1 1 30%;text-align:center;font-size:13px;min-height:40px;padding:6px}
+.sortitem.right{border-color:var(--ok);background:var(--okbg)}
+.sortitem.wrong{border-color:var(--bad);background:var(--badbg)}
+.links a{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.links a:last-child{border-bottom:0}
+.links a span.s{font-size:13px;color:var(--muted)}
+.links a b{color:var(--navy);font-weight:600}
+.net{font-size:11px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.navbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.badge{text-align:center;padding:22px 16px}
+.badge .medal{font-size:54px;line-height:1}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:24px;font-size:14px;z-index:20;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.small{font-size:13px;color:var(--muted)}
+footer{font-size:12px;color:var(--muted);padding:10px 0 30px;text-align:center}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:0 0 12px 40px}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+@media (max-width:380px){.hero h1{font-size:26px}.actions{grid-template-columns:1fr}.outgrid{grid-template-columns:1fr}}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:1px 7px;margin-left:4px;vertical-align:1px;white-space:nowrap}
+.tag.dir{background:#E2F2F3;color:#0E6E78}.tag.ens{background:#EDE7F6;color:#5B3A9A}.tag.pra{background:#FFF1D6;color:#8A5A00}.tag.lac{background:#FDE3E6;color:#B5172E}
+.out.alert{background:linear-gradient(135deg,#B5172E,#5A0F22)}
+.aorta{display:block;width:100%;height:70px;margin:10px 0 4px}
+.aorta path{stroke:var(--cyan);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s ease-out forwards}
+.aorta .sac{fill:rgba(224,72,90,.35);stroke:none;transform-origin:300px 35px;animation:pulse 1.1s ease-in-out 2.6s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}40%{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.aorta path{animation:none;stroke-dashoffset:0}.aorta .sac{animation:none}}
+.station:nth-child(8n+1) .card{border-left:5px solid #E0485A}.station:nth-child(8n+2) .card{border-left:5px solid #F4B942}
+.trail li:nth-child(1) .card{border-left:5px solid #E0485A}.trail li:nth-child(2) .card{border-left:5px solid #F4B942}.trail li:nth-child(3) .card{border-left:5px solid #B5172E}
+.trail li:nth-child(4) .card{border-left:5px solid #0E6E78}.trail li:nth-child(5) .card{border-left:5px solid #5B3A9A}.trail li:nth-child(6) .card{border-left:5px solid #2E86AB}
+.trail li:nth-child(7) .card{border-left:5px solid #3A7D44}.trail li:nth-child(8) .card{border-left:5px solid #D9822B}.trail li:nth-child(9) .card{border-left:5px solid #5A0F22}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<noscript><div class="wrap"><p>Ative o JavaScript para usar a trilha.</p></div></noscript>
+
+<script>
+"use strict";
+/* ====================== Armazenamento seguro ====================== */
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+let progress = store.get("trilha-aaa-v1", {});
+function saveProgress(){ store.set("trilha-aaa-v1", progress); }
+/* ====================== Conteúdo ====================== */
+const MODULES = [
+{
+  id:"m1", n:1, title:"Definição e risco", sub:"O que é o AAA, em quem aparece e como evolui",
+  blocks:[
+    {t:"html", html:`<span class="kicker">Em uma frase</span>
+      <div class="quote">AAA é a aorta abdominal com 3,0 cm ou mais: quase sempre silencioso, cresce devagar e acelera à medida que aumenta.</div>
+      <ul>
+        <li><b>Definição:</b> diâmetro da aorta abdominal ≥ <b>3,0 cm</b>, medido por ultrassonografia. <span class="tag dir">Diretriz</span></li>
+        <li><b>Localização mais comum:</b> infrarrenal, abaixo das artérias renais. <span class="tag dir">Diretriz</span></li>
+        <li>A maioria é <b>assintomática até romper</b>; após a rotura, a mortalidade chega a cerca de <b>81%</b>. <span class="tag dir">Diretriz</span></li>
+      </ul>`},
+    {t:"html", html:`<span class="kicker">Fatores de risco</span>
+      <ul>
+        <li><b>Principais:</b> idade avançada, sexo masculino, tabagismo, parente de 1º grau com AAA.</li>
+        <li><b>Outros:</b> outros aneurismas, doença coronariana ou cerebrovascular, aterosclerose, hipercolesterolemia, hipertensão.</li>
+        <li><b>Tabagismo</b> é o fator <b>modificável</b> mais forte.</li>
+        <li>Curiosidade que cai em prova: <b>diabetes</b> está associado a <b>menor</b> risco de AAA.</li>
+      </ul>
+      <p class="small">Fonte: USPSTF 2019. <span class="tag dir">Diretriz</span></p>`},
+    {t:"sort", id:"risco"},
+    {t:"html", html:`<span class="kicker">História natural: quanto cresce por ano</span>
+      <div class="tablewrap"><table>
+        <tr><th>Diâmetro inicial</th><th>Crescimento médio</th></tr>
+        <tr><td>30–40 mm</td><td>~0,8 mm/ano</td></tr>
+        <tr><td>40–50 mm</td><td>~1,2 mm/ano</td></tr>
+        <tr><td>≥ 50 mm</td><td>~4,1 mm/ano</td></tr>
+      </table></div>
+      <p class="small">Coorte espanhola, J Clin Med 2025. <span class="tag ens">Ensaio/coorte</span> Quanto maior o aneurisma, mais rápido cresce, por isso a vigilância encurta.</p>
+      <p><b>Fatores de risco para rotura:</b> maior diâmetro, crescimento rápido, sexo feminino, idade mais avançada, tabagismo ativo.</p>`},
+    {t:"html", html:`<span class="kicker">Armadilha clínica</span><p>O diagnóstico costuma ser achado de exame feito por outro motivo. <b>Sem sintoma não significa sem risco.</b></p>`},
+  ],
+  quiz:[
+    {q:"O critério diagnóstico do AAA é um diâmetro da aorta abdominal de:", o:["≥ 2,0 cm","≥ 2,5 cm","≥ 3,0 cm","≥ 5,5 cm"], a:2, e:"AAA = aorta abdominal ≥ 3,0 cm. 5,5 cm é o limiar cirúrgico em homens, não o diagnóstico."},
+    {q:"Qual é o principal fator de risco modificável para AAA?", o:["Diabetes","Tabagismo","Sexo masculino","História familiar"], a:1, e:"Tabagismo. Sexo e história familiar não são modificáveis, e o diabetes está associado a menor risco."},
+    {q:"Em relação à história natural do AAA, é correto afirmar:", o:["Cresce sempre na mesma velocidade","Cresce mais rápido quanto maior o diâmetro","Para de crescer após os 4 cm","Diminui com exercício resistido"], a:1, e:"O crescimento acelera com o diâmetro: ~0,8 mm/ano entre 30–40 mm e ~4,1 mm/ano acima de 50 mm."}
+  ]
+},
+{
+  id:"m2", n:2, title:"Rastreamento e cirurgia", sub:"Quem rastrear, quando vigiar e quando operar",
+  blocks:[
+    {t:"html", html:`<span class="kicker">Em uma frase</span>
+      <div class="quote">Rastreia-se com ultrassom quem tem alto risco; opera-se o AAA assintomático a partir de 5,5 cm em homens e 5,0 cm em mulheres.</div>`},
+    {t:"html", html:`<span class="kicker">Rastreamento</span>
+      <ul>
+        <li><b>Exame:</b> ultrassonografia abdominal. A ESVS 2024 baseia a decisão cirúrgica na medida do ultrassom; a angiotomografia serve para planejar o tratamento.</li>
+        <li><b>ESVS 2024:</b> rastrear apenas <b>populações de alto risco</b> (classe I, nível A). Deixou de recomendar para todos os homens de 65 anos porque a prevalência caiu para menos de 1% em vários países.</li>
+        <li><b>USPSTF 2019:</b> ultrassom único em homens de 65 a 75 anos que <b>já fumaram</b> (grau B). Não rastrear rotineiramente mulheres que nunca fumaram e sem história familiar (grau D).</li>
+      </ul>`},
+    {t:"html", html:`<span class="kicker">Quando operar</span>
+      <div class="tablewrap"><table>
+        <tr><th>Situação</th><th>Conduta</th></tr>
+        <tr><td>Homem, assintomático, ≥ 5,5 cm</td><td>Considerar correção eletiva</td></tr>
+        <tr><td>Mulher, assintomática, ≥ 5,0 cm</td><td>Considerar correção eletiva</td></tr>
+        <tr><td>Abaixo desses limiares</td><td><b>Não</b> operar (ESVS 2024, classe III): vigiar</td></tr>
+        <tr><td>Crescimento rápido</td><td>Encaminhar para avaliação</td></tr>
+        <tr><td>Sintomático</td><td>Urgência</td></tr>
+        <tr><td>Rotura</td><td>Emergência</td></tr>
+      </table></div>`},
+    {t:"calc", id:"aaa"},
+    {t:"html", html:`<span class="kicker">Armadilha clínica</span><p>A regra do rastreamento <b>não vale para quem tem sintoma</b>. Dor abdominal ou lombar em paciente de risco exige avaliação imediata, em qualquer idade.</p>`},
+  ],
+  quiz:[
+    {q:"Segundo a ESVS 2024, o rastreamento de AAA é recomendado para:", o:["Toda a população acima de 50 anos","Todos os homens de 65 anos, sem exceção","Populações de alto risco","Apenas mulheres fumantes"], a:2, e:"A ESVS 2024 restringiu o rastreamento a populações de alto risco (classe I, nível A)."},
+    {q:"O limiar de correção eletiva do AAA assintomático é:", o:["5,0 cm em homens e 4,5 cm em mulheres","5,5 cm em homens e 5,0 cm em mulheres","6,0 cm em ambos os sexos","4,5 cm em ambos os sexos"], a:1, e:"5,5 cm em homens e 5,0 cm em mulheres. Mulheres têm maior risco de rotura para o mesmo diâmetro."},
+    {q:"Homem de 70 anos com AAA de 3,4 cm. Quando repetir o ultrassom (ACC/AHA 2022)?", o:["Em 6 meses","Em 1 ano","Em 3 anos","Não precisa de vigilância"], a:2, e:"3,0–3,9 cm: a cada 3 anos."}
+  ]
+},
+{
+  id:"m3", n:3, title:"Rotura", sub:"Reconhecer em 30 segundos e agir",
+  blocks:[
+    {t:"html", html:`<span class="kicker">Em uma frase</span>
+      <div class="quote">Dor abdominal ou lombar súbita, hipotensão e massa pulsátil: o fisioterapeuta para tudo e aciona a equipe.</div>
+      <span class="kicker">Tríade clássica</span>
+      <ol class="steps"><li>Dor abdominal, lombar ou no flanco, <b>súbita e intensa</b></li><li><b>Hipotensão</b> ou choque</li><li><b>Massa abdominal pulsátil</b></li></ol>
+      <p>A tríade completa aparece numa minoria dos casos: <b>dois elementos em paciente de risco já bastam para suspeitar</b>. <span class="tag pra">Prática</span></p>
+      <p>No hospital, a conduta inclui <b>hipotensão permissiva</b> e correção de emergência. <span class="tag dir">Diretriz</span></p>`},
+    {t:"html", html:`<span class="kicker">Diagnósticos que confundem</span>
+      <div class="chips"><span class="chip">Cólica renal</span><span class="chip">Lombalgia mecânica</span><span class="chip">Diverticulite</span><span class="chip">Infarto agudo do miocárdio</span></div>`},
+    {t:"sort", id:"rotura"},
+    {t:"html", html:`<span class="kicker">Armadilha clínica</span><p>"Lombalgia nova e forte" em idoso tabagista ou com AAA conhecido <b>nunca é caso de terapia manual</b> antes de excluir rotura.</p>`},
+  ],
+  quiz:[
+    {q:"A tríade clássica da rotura do AAA é:", o:["Febre, dor abdominal e icterícia","Dor abdominal ou lombar súbita, hipotensão e massa pulsátil","Claudicação, palidez e ausência de pulsos","Dispneia, dor torácica e síncope"], a:1, e:"Dor súbita, hipotensão e massa pulsátil. Claudicação, palidez e ausência de pulsos descrevem isquemia de membro."},
+    {q:"Diante de suspeita de rotura durante o atendimento, o fisioterapeuta deve:", o:["Sentar o paciente para aliviar a dor","Concluir a sessão e registrar","Interromper, deitar, não mobilizar e acionar a equipe","Aplicar calor e reavaliar em 15 minutos"], a:2, e:"Rotura é emergência com mortalidade de até ~81%: não mobilizar e acionar a equipe imediatamente."},
+    {q:"Qual diagnóstico diferencial mais engana o fisioterapeuta?", o:["Lombalgia mecânica","Entorse de tornozelo","Tendinite do ombro","Fascite plantar"], a:0, e:"Dor lombar é queixa comum na fisioterapia. Hipotensão e taquicardia associadas apontam para choque, não para lombalgia mecânica."}
+  ]
+},
+{
+  id:"m4", n:4, title:"AAA não corrigido", sub:"Cuidados, restrições e exercício resistido",
+  blocks:[
+    {t:"html", html:`<span class="kicker">Em uma frase</span>
+      <div class="quote">A diretriz não manda restringir exercício no AAA pequeno: o que se controla é a pressão arterial e a Valsalva, não um número de quilos.</div>
+      <ul>
+        <li><b>ESVS 2024:</b> restringir exercício ou atividade sexual no AAA pequeno <b>não é indicado</b>. <span class="tag dir">Diretriz</span></li>
+        <li><b>Revisão 2024:</b> em AAA até 5,5 cm, o exercício é seguro e melhora a capacidade funcional; só quatro ensaios incluíram resistido.</li>
+        <li><b>Pré-habilitação funciona:</b> 6 semanas de exercício supervisionado antes da correção reduziram complicações de <b>41,9%</b> para <b>22,6%</b> e encurtaram a internação (Barakat, Ann Surg 2016, 124 pacientes). <span class="tag ens">Ensaio</span></li>
+        <li><b>Controle de risco:</b> parar de fumar, controlar a PA, estatina conforme orientação médica.</li>
+      </ul>`},
+    {t:"calc", id:"res"},
+    {t:"html", html:`<span class="kicker">Lacuna de evidência</span>
+      <div class="note"><b>Não há consenso sobre um limite de carga em quilos</b> para o AAA não corrigido. Se uma fonte trouxer "não pode levantar mais de X kg", verifique de onde veio o número. <span class="tag lac">Lacuna</span></div>
+      <p>Mais cautela perto do limiar cirúrgico (≥ 5,0 cm) e em hipertensos não controlados: priorizar o aeróbio e alinhar com a equipe vascular. <span class="tag pra">Prática</span></p>`},
+    {t:"scenario", id:"antonio"},
+    {t:"html", html:`<span class="kicker">Armadilha clínica</span><p>Proibir tudo "por segurança" descondiciona o paciente e <b>aumenta o risco da cirurgia</b> que ele provavelmente fará um dia.</p>`},
+  ],
+  quiz:[
+    {q:"Sobre exercício no AAA pequeno, a ESVS 2024 afirma que:", o:["Todo exercício resistido é contraindicado","Restringir exercício ou atividade sexual não é indicado","Só é permitido exercício após a correção","O limite de carga é de 10 kg"], a:1, e:"Restringir exercício no AAA pequeno não é indicado. Não existe limite de 10 kg validado."},
+    {q:"O principal cuidado na prescrição de resistido para o AAA não corrigido é:", o:["Cargas máximas com poucas repetições","Evitar Valsalva e picos de pressão arterial","Treinar apenas isometria","Evitar qualquer exercício de membros inferiores"], a:1, e:"O risco a controlar é o pico pressórico: sem Valsalva, sem cargas máximas, sem isometria sustentada."},
+    {q:"No ensaio de Barakat (2016), o exercício supervisionado pré-operatório:", o:["Não alterou os desfechos","Aumentou o risco de rotura","Reduziu complicações e o tempo de internação","Só beneficiou pacientes operados por EVAR"], a:2, e:"As complicações caíram de 41,9% para 22,6%, com internação mais curta. O estudo incluiu cirurgia aberta e EVAR."}
+  ]
+},
+{
+  id:"m5", n:5, title:"Pós-op de cirurgia aberta", sub:"Laparotomia, UTI, pulmão e mobilização precoce",
+  blocks:[
+    {t:"html", html:`<span class="kicker">Em uma frase</span>
+      <div class="quote">Cirurgia grande, com laparotomia e UTI: o foco do fisioterapeuta é o pulmão e a mobilização precoce.</div>
+      <ul>
+        <li>Acesso por <b>laparotomia</b> ou <b>retroperitoneal</b>, com clampeamento da aorta.</li>
+        <li>Dor incisional e distensão abdominal <b>reduzem volumes pulmonares</b> e prejudicam a tosse. <span class="tag pra">Prática</span></li>
+        <li><b>Complicações:</b> pulmonares, cardíacas, renais, íleo, delirium, isquemia de cólon e síndrome compartimental abdominal.</li>
+        <li><b>ERAS/SVS 2022:</b> analgesia multimodal, alimentação oral precoce, retirada precoce de sondas e drenos e <b>mobilização precoce</b>. <span class="tag dir">Consenso</span></li>
+      </ul>`},
+    {t:"html", html:`<span class="kicker">O papel do fisioterapeuta</span>
+      <ol class="steps">
+        <li><b>Pré-operatório:</b> educação, treino de tosse e incentivador inspiratório, condicionamento.</li>
+        <li><b>UTI / 1º dia pós-operatório:</b> exercícios respiratórios, tosse com proteção da incisão (travesseiro), sedestação e ortostatismo se estável.</li>
+        <li><b>Enfermaria:</b> deambulação progressiva várias vezes ao dia, exercícios ativos, prevenção de trombose.</li>
+        <li><b>Alta:</b> orientações de atividade e sinais de alerta.</li>
+      </ol>`},
+    {t:"html", html:`<span class="kicker">Restrições na alta</span>
+      <ul><li>Evitar carregar mais de ~4–5 kg e esforço abdominal intenso por <b>6–8 semanas</b>.</li><li>Dirigir após ~4–6 semanas, sem dor e sem opioide.</li><li>Caminhada diária progressiva desde a alta.</li></ul>
+      <p class="small"><span class="tag pra">Prática</span> Varia por serviço: confirme com a equipe cirúrgica.</p>`},
+    {t:"scenario", id:"jose"},
+    {t:"html", html:`<span class="kicker">Armadilha clínica</span><p>"Esperar o paciente melhorar para mobilizar." <b>A imobilidade é que piora</b> o pulmão, o intestino e a cognição.</p>`},
+  ],
+  quiz:[
+    {q:"No 1º dia pós-operatório da cirurgia aberta, a prioridade da fisioterapia é:", o:["Repouso absoluto até retirar os drenos","Fisioterapia respiratória e mobilização precoce","Treino resistido de alta intensidade","Apenas orientação de alta"], a:1, e:"O consenso ERAS/SVS 2022 inclui a mobilização precoce; a laparotomia exige atenção pulmonar."},
+    {q:"Por que a laparotomia aumenta o risco de complicações pulmonares?", o:["Porque lesa o diafragma diretamente","Porque dor e distensão reduzem volumes e a eficácia da tosse","Porque exige ventilação por 2 semanas","Porque contraindica oxigênio"], a:1, e:"A dor incisional e a distensão abdominal levam a respiração superficial e tosse fraca, favorecendo atelectasia e pneumonia."},
+    {q:"Qual destas é complicação precoce descrita após a correção aberta?", o:["Endoleak tipo II","Isquemia de cólon","Pseudoaneurisma femoral","Migração da endoprótese"], a:1, e:"Isquemia de cólon e síndrome compartimental abdominal são complicações precoces da cirurgia aberta. Endoleak e migração são do EVAR."}
+  ]
+},
+{
+  id:"m6", n:6, title:"Pós-op de EVAR", sub:"Virilha, pulsos, deambulação precoce e endoleak",
+  blocks:[
+    {t:"html", html:`<span class="kicker">O que é o EVAR</span>
+      <p><b>Endovascular Aneurysm Repair:</b> uma endoprótese entra por cateter pela artéria femoral e se apoia na aorta saudável acima e abaixo do aneurisma. O saco aneurismático fica excluído da circulação.</p>
+      <p>É a técnica mais usada hoje: nos EUA, ~<b>80%</b> das correções eletivas e ~<b>52%</b> das de AAA roto (USPSTF 2019).</p>
+      <div class="tablewrap"><table>
+        <tr><th></th><th>Aberta</th><th>EVAR</th></tr>
+        <tr><td>Acesso</td><td>Laparotomia</td><td>Virilha</td></tr>
+        <tr><td>Internação</td><td>Dias, com UTI</td><td>1–2 dias</td></tr>
+        <tr><td>Foco do fisio</td><td>Pulmão + mobilizar</td><td>Virilha + deambular</td></tr>
+        <tr><td>Retorno</td><td>Semanas</td><td>~1–2 semanas</td></tr>
+        <tr><td>Imagem</td><td>Menos intensiva</td><td>Por toda a vida</td></tr>
+      </table></div>`},
+    {t:"html", html:`<span class="kicker">O essencial</span>
+      <ul>
+        <li><b>Endoleak:</b> fluxo persistente para dentro do saco do aneurisma. Por isso o seguimento por imagem dura a vida toda. <span class="tag dir">Diretriz</span></li>
+        <li>Repouso com o membro estendido por algumas horas após a punção; depois, <b>deambulação no mesmo dia ou no 1º dia pós-operatório</b>. <span class="tag pra">Prática</span></li>
+        <li>Febre e mal-estar nos primeiros dias podem ser a <b>síndrome pós-implante</b>. <span class="tag pra">Prática</span></li>
+      </ul>`},
+    {t:"sort", id:"virilha"},
+    {t:"html", html:`<span class="kicker">Armadilha clínica</span><p>"É minimamente invasivo, não precisa de fisio." O paciente continua idoso, com <b>aterosclerose sistêmica</b> e risco de descondicionamento.</p>`},
+  ],
+  quiz:[
+    {q:"Endoleak é:", o:["Infecção da ferida inguinal","Fluxo persistente de sangue para dentro do saco aneurismático após EVAR","Vazamento de linfa na virilha","Trombose do enxerto femoropoplíteo"], a:1, e:"É o motivo pelo qual o EVAR exige seguimento por imagem por toda a vida."},
+    {q:"Quando o paciente costuma deambular após EVAR?", o:["Após 7 dias","No mesmo dia ou no 1º dia pós-operatório","Só após a alta","Após retirar os pontos"], a:1, e:"Após o repouso inicial pós-punção, a deambulação é precoce. O tempo exato depende do protocolo do serviço."},
+    {q:"Durante a marcha pós-EVAR, o hematoma inguinal cresce e fica pulsátil. A conduta é:", o:["Continuar devagar","Aplicar gelo e seguir","Parar, deitar, comprimir se sangrar e acionar a equipe","Aumentar a flexão de quadril para comprimir"], a:2, e:"Hematoma que cresce e pulsa sugere pseudoaneurisma ou sangramento ativo."}
+  ]
+},
+{
+  id:"m7", n:7, title:"Revascularização de MMII", sub:"Bypass, endovascular e exercício supervisionado",
+  blocks:[
+    {t:"html", html:`<span class="kicker">Em uma frase</span>
+      <div class="quote">Revascularizar não cura a doença arterial: depois do procedimento vem o exercício supervisionado.</div>
+      <ul>
+        <li><b>ESC 2024:</b> treino com <b>exercício supervisionado</b> recomendado na doença arterial periférica sintomática e após revascularização endovascular. <span class="tag dir">Diretriz</span></li>
+        <li><b>ESC 2024:</b> revascularização <b>não</b> é recomendada na doença assintomática. <span class="tag dir">Diretriz</span></li>
+        <li><b>ERAS/SVS 2023:</b> 26 sugestões para o perioperatório do bypass infrainguinal. <span class="tag dir">Consenso</span></li>
+      </ul>`},
+    {t:"html", html:`<span class="kicker">Bypass x endovascular</span>
+      <div class="tablewrap"><table>
+        <tr><th></th><th>Bypass</th><th>Endovascular</th></tr>
+        <tr><td>Acesso</td><td>Incisões na virilha e na perna</td><td>Punção arterial</td></tr>
+        <tr><td>Edema</td><td>Frequente</td><td>Menor</td></tr>
+        <tr><td>Ferida</td><td>Deiscência, infecção</td><td>Sítio de punção</td></tr>
+        <tr><td>Internação</td><td>Dias</td><td>Curta</td></tr>
+      </table></div>
+      <span class="kicker">Progressão</span>
+      <ol class="steps"><li>Hospital: deambulação precoce, treino de marcha e transferências.</li><li>Após a alta: caminhada supervisionada ~3x/semana, 30–45 min, até dor moderada, com pausas.</li><li>Sempre: tabagismo, diabetes, PA, lipídios e cuidado com os pés.</li></ol>`},
+    {t:"sort", id:"mmii"},
+    {t:"html", html:`<span class="kicker">Armadilha clínica</span><p>Achar que o paciente revascularizado "está curado". Sem exercício e controle de risco, <b>a reestenose e os eventos voltam</b>.</p>`},
+  ],
+  quiz:[
+    {q:"Segundo a ESC 2024, após revascularização endovascular de MMII recomenda-se:", o:["Repouso por 6 semanas","Treino com exercício supervisionado","Evitar caminhada até nova imagem","Apenas tratamento medicamentoso"], a:1, e:"O exercício supervisionado é recomendado na DAP sintomática e após revascularização endovascular."},
+    {q:"Dor desproporcional que piora com o estiramento passivo do pé, após bypass, sugere:", o:["Dor incisional esperada","Síndrome compartimental pós-reperfusão","Trombose venosa superficial","Linfedema"], a:1, e:"É emergência cirúrgica: suspender a intervenção e acionar a equipe."},
+    {q:"A revascularização na DAP assintomática é:", o:["Recomendada","Não recomendada","Obrigatória em diabéticos","Indicada antes do exercício"], a:1, e:"A ESC 2024 não recomenda revascularização na doença assintomática."}
+  ]
+},
+{
+  id:"casos", n:8, title:"Casos clínicos", sub:"Junte as peças: quatro pacientes, quatro decisões",
+  blocks:[
+    {t:"html", html:`<span class="kicker">Como usar</span><p>Leia o caso, escolha a conduta e leia o comentário. Cada caso junta pelo menos duas estações.</p>`},
+    {t:"scenario", id:"c1"},
+    {t:"scenario", id:"c2"},
+    {t:"scenario", id:"c3"},
+    {t:"scenario", id:"c4"},
+  ],
+  quiz:[
+    {q:"Seu Antônio, AAA de 4,6 cm: de quanto em quanto tempo repetir o ultrassom?", o:["6 meses","Anual","3 anos","Não precisa"], a:1, e:"Homem com 4,0–4,9 cm: vigilância anual (ACC/AHA 2022)."},
+    {q:"Dona Lúcia, AAA de 5,2 cm, já tinha indicação de correção?", o:["Não: o limiar é 5,5 cm para todos","Sim: em mulheres o limiar é 5,0 cm","Só se fosse sintomática","Só após 2 medidas de 6 cm"], a:1, e:"Em mulheres, a correção é considerada a partir de 5,0 cm."},
+    {q:"Mulher de 66 anos, fumante, irmão com AAA: pela ESVS 2024, ela:", o:["Não deve ser rastreada por ser mulher","Está em população de alto risco: indicar avaliação para rastreamento","Só rastreia após os 75 anos","Precisa de angiotomografia anual"], a:1, e:"Parente de 1º grau com AAA é população de alto risco na ESVS 2024. Para a USPSTF, nesse grupo de mulheres a evidência é insuficiente."}
+  ]
+},
+{
+  id:"final", n:9, title:"Desafio final", sub:"Verdadeiro ou falso e 10 questões de revisão",
+  blocks:[
+    {t:"html", html:`<span class="kicker">Antes de começar</span><p>Este é o fechamento da trilha. O jogo de verdadeiro ou falso aquece; o quiz final cobre todas as estações.</p>`},
+    {t:"sort", id:"vf"},
+  ],
+  quiz:[
+    {q:"O exame de escolha para rastreamento e vigilância do AAA é:", o:["Ressonância magnética","Angiotomografia","Ultrassonografia abdominal","Radiografia de abdome"], a:2, e:"Barato e sem radiação; a ESVS 2024 baseia o limiar cirúrgico na medida do ultrassom."},
+    {q:"Qual condição está associada a MENOR risco de AAA?", o:["Hipertensão","Doença coronariana","Diabetes","Hipercolesterolemia"], a:2, e:"Diabetes (USPSTF 2019)."},
+    {q:"Mulher com AAA assintomático de 4,8 cm. Conduta:", o:["Correção eletiva imediata","Vigilância por ultrassom e controle de risco","Repouso absoluto","Alta sem seguimento"], a:1, e:"Abaixo de 5,0 cm em mulher: vigiar (a cada 6 meses a partir de 4,5 cm, pelo ACC/AHA 2022)."},
+    {q:"Paciente com AAA de 4,2 cm faz supino e prende o ar. O que corrigir primeiro?", o:["Aumentar a carga","Eliminar a Valsalva: expirar na fase de força","Trocar por isometria","Suspender todo exercício"], a:1, e:"A Valsalva gera pico pressórico. O exercício continua, com respiração correta e carga moderada."},
+    {q:"Qual achado NÃO faz parte da tríade da rotura?", o:["Massa pulsátil","Hipotensão","Febre","Dor lombar súbita"], a:2, e:"Febre não faz parte da tríade."},
+    {q:"Qual técnica exige seguimento por imagem por toda a vida?", o:["Cirurgia aberta","EVAR","Ambas igualmente","Nenhuma"], a:1, e:"O EVAR, por causa de endoleak e migração da prótese."},
+    {q:"Restrição típica de carga após correção aberta:", o:["Nenhuma","~4–5 kg por 6–8 semanas","20 kg por 1 semana","Proibição permanente"], a:1, e:"Prática corrente, que varia entre serviços: proteger a parede abdominal por algumas semanas."},
+    {q:"No pós-EVAR, pé frio, pálido e sem pulso distal indica:", o:["Achado esperado","Isquemia do membro: emergência","Síndrome pós-implante","Linfocele"], a:1, e:"Isquemia de membro: acionar a equipe imediatamente."},
+    {q:"A frequência típica do programa de caminhada supervisionada após revascularização é:", o:["1x/mês","~3x/semana, 30–45 min","Diária, 5 min","Só quando houver dor"], a:1, e:"Cerca de 3 vezes por semana, 30–45 minutos, caminhando até dor moderada, com pausas."},
+    {q:"A maior parte das recomendações da ESVS 2024 se apoia em:", o:["Nível A","Nível B","Nível C ou consenso","Opinião de pacientes"], a:2, e:"Cerca de 70% são nível C ou consenso: forte na prática, frágil em evidência."}
+  ]
+}
+];
+
+const REFS = [
+  {t:"Wanhainen A et al. ESVS 2024 Clinical Practice Guidelines on the Management of Abdominal Aorto-Iliac Artery Aneurysms. Eur J Vasc Endovasc Surg 2024;67(2):192-331.", u:"https://doi.org/10.1016/j.ejvs.2023.11.002"},
+  {t:"Mazzolai L et al. 2024 ESC Guidelines for the management of peripheral arterial and aortic diseases. Eur Heart J 2024;45(36):3538-3700.", u:"https://doi.org/10.1093/eurheartj/ehae179"},
+  {t:"Isselbacher EM et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. Circulation 2022;146(24).", u:"https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"},
+  {t:"US Preventive Services Task Force. Screening for Abdominal Aortic Aneurysm. JAMA 2019;322(22):2211-2218.", u:"https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/abdominal-aortic-aneurysm-screening"},
+  {t:"McGinigle KL et al. Perioperative care in open aortic vascular surgery: ERAS Society and SVS consensus. J Vasc Surg 2022;75(6):1796-1820.", u:"https://doi.org/10.1016/j.jvs.2022.01.131"},
+  {t:"McGinigle KL et al. A framework for perioperative care for lower extremity vascular bypasses: ERAS Society and SVS consensus. J Vasc Surg 2023;77(5):1295-1315.", u:"https://doi.org/10.1016/j.jvs.2023.01.018"},
+  {t:"Exercise, Sports, and Cardiac Rehabilitation Recommendations in Patients with Aortic Aneurysms and Post-Aortic Repair: A Review of the Literature. 2024.", u:"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11677462/"},
+  {t:"Barakat HM et al. Preoperative supervised exercise improves outcomes after elective AAA repair: RCT. Ann Surg 2016;264(1):47-53.", u:"https://doi.org/10.1097/SLA.0000000000001609"},
+  {t:"Taxas de crescimento do AAA por faixa de diâmetro na população espanhola. J Clin Med 2025;14:4720.", u:"https://ddd.uab.cat/pub/artpub/2025/319831/jcm-14-04720.pdf"},
+  {t:"Resumo: Highlights from the ESVS 2024 guidelines (Endovascular Today).", u:"https://evtoday.com/articles/2024-mar/highlights-from-the-esvs-2024-clinical-practice-guidelines-on-the-management-of-abdominal-aortoiliac-artery-aneurysms"},
+  {t:"Resumo: 2024 ESC Guidelines, foco em doença arterial periférica (PCR Online).", u:"https://www.pcronline.com/News/Congress-coverages/ESC/2024/2024-ESC-Guidelines-Peripheral-arterial-and-aortic-diseases-Focus-on-Peripheral-Arterial-Diseases"}
+];
+
+/* ====================== Utilitários ====================== */
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num = v => { const n = parseFloat(String(v).replace(",", ".")); return isFinite(n) ? n : NaN; };
+const fmt = (n, d=0) => n.toLocaleString("pt-BR", {minimumFractionDigits:d, maximumFractionDigits:d});
+function toast(msg){ const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(), 2200); }
+function doneCount(){ return MODULES.filter(m => progress[m.id] && progress[m.id].quiz).length; }
+
+/* ====================== Calculadoras ====================== */
+const CALCS = {
+  aaa: {
+    title:"Simulador: o que fazer com este aneurisma?",
+    html:`<p>Coloque os dados do paciente e veja a conduta segundo as diretrizes.</p>
+      <label>Sexo</label>
+      <div class="seg" id="aSex"><button data-v="M" aria-pressed="true">Homem</button><button data-v="F" aria-pressed="false">Mulher</button></div>
+      <div class="row2"><div><label for="aDiam">Diâmetro (cm)</label><input id="aDiam" type="number" inputmode="decimal" step="0.1" value="4.6"></div>
+      <div><label for="aGrow">Cresceu em 1 ano (cm)</label><input id="aGrow" type="number" inputmode="decimal" step="0.1" value="0.2"></div></div>
+      <label>Tem dor abdominal ou lombar atribuída ao aneurisma?</label>
+      <div class="seg" id="aSym"><button data-v="0" aria-pressed="true">Não</button><button data-v="1" aria-pressed="false">Sim</button></div>
+      <div id="aOut"></div>
+      <p class="small" style="margin-top:8px">Limiares: ESVS 2024. Intervalos de vigilância: ACC/AHA 2022. Ferramenta didática: a decisão real é da equipe vascular.</p>`,
+    init(root){
+      let sex="M", sym=0;
+      const segs=(id,cb)=>root.querySelectorAll(`#${id} button`).forEach(b=>b.addEventListener("click",()=>{
+        root.querySelectorAll(`#${id} button`).forEach(x=>x.setAttribute("aria-pressed","false"));
+        b.setAttribute("aria-pressed","true"); cb(b.dataset.v); run();
+      }));
+      segs("aSex",v=>sex=v); segs("aSym",v=>sym=+v);
+      const run=()=>{
+        const d=num($("#aDiam",root).value), g=num($("#aGrow",root).value);
+        if(!(d>0)){ $("#aOut",root).innerHTML=""; return; }
+        const lim = sex==="M"?5.5:5.0;
+        let big, lbl, txt, tone="";
+        if(d<3.0){
+          lbl="Classificação"; big="Não é AAA";
+          txt = d>=2.5 ? "Entre 2,5 e 2,9 cm a aorta é considerada subaneurismática: a ESVS 2024 passou a incluir esses pacientes na vigilância, porque parte deles chega a AAA em poucos anos." : "Abaixo de 3,0 cm não há aneurisma.";
+          if(sym) txt += " A dor precisa de investigação: não é explicada por AAA.";
+        } else if(sym){
+          lbl="Conduta"; big="Urgência"; tone="alert";
+          txt="AAA sintomático é urgência cirúrgica. Se houver hipotensão ou choque, pense em rotura: emergência.";
+        } else if(d>=lim){
+          lbl="Conduta"; big="Limiar atingido"; tone="alert";
+          txt=`Com ${fmt(d,1)} cm, atingiu o limiar de ${fmt(lim,1)} cm para ${sex==="M"?"homens":"mulheres"}: considerar correção eletiva (aberta ou EVAR). Pré-habilitação ajuda: complicações caíram de 41,9% para 22,6% no ensaio de Barakat.`;
+        } else if(g>=1.0){
+          lbl="Conduta"; big="Crescimento rápido"; tone="alert";
+          txt="Crescimento de cerca de 1 cm ou mais no ano: encaminhar para avaliação de correção, após confirmar a medida.";
+        } else {
+          let iv;
+          if(d<4.0) iv="a cada 3 anos";
+          else if((sex==="M"&&d<5.0)||(sex==="F"&&d<4.5)) iv="uma vez por ano";
+          else iv="a cada 6 meses";
+          lbl="Conduta"; big="Vigiar";
+          txt=`Abaixo do limiar de ${fmt(lim,1)} cm: não operar (ESVS 2024, classe III). Repetir o ultrassom <b style="color:#fff">${iv}</b>. Exercício liberado com prescrição: aeróbio moderado e resistido leve a moderado, sem Valsalva. Parar de fumar e controlar a PA.`;
+        }
+        $("#aOut",root).innerHTML=`<div class="out ${tone}"><div class="lbl">${lbl}</div><div class="big">${big}</div><p>${txt}</p></div>`;
+      };
+      root.querySelectorAll("input").forEach(i=>i.addEventListener("input",run)); run();
+    }
+  },
+  res: {
+    title:"Calculadora: resistido no AAA não corrigido",
+    html:`<p>A partir da carga máxima (1RM) de um exercício, veja a faixa de trabalho e o checklist de segurança.</p>
+      <div class="row2"><div><label for="rRM">1RM do exercício (kg)</label><input id="rRM" type="number" inputmode="decimal" value="40"></div>
+      <div><label for="rPA">PA sistólica de repouso (mmHg)</label><input id="rPA" type="number" inputmode="decimal" value="132"></div></div>
+      <div id="rOut"></div>`,
+    init(root){
+      const run=()=>{
+        const rm=num($("#rRM",root).value), pa=num($("#rPA",root).value);
+        if(!(rm>0)){ $("#rOut",root).innerHTML=""; return; }
+        const lo=rm*0.4, hi=rm*0.6;
+        const paMsg = !(pa>0) ? "" : pa>=160 ? `<div class="fb bad" style="margin-top:10px"><b>PA de repouso elevada.</b> Antes de treinar resistido, a PA precisa estar controlada: priorize aeróbio leve e comunique a equipe.</div>` : "";
+        $("#rOut",root).innerHTML=`<div class="out"><div class="outgrid">
+          <div><div class="lbl">Faixa de carga (40–60%)</div><div class="big">${fmt(lo,0)}–${fmt(hi,0)} kg</div></div>
+          <div><div class="lbl">Volume</div><div class="big">10–15 rep</div><p>1–3 séries · Borg 11–13</p></div></div>
+          <p>Expirar na fase de força, <b style="color:#fff">nunca prender o ar</b>. Evitar cargas máximas, isometria sustentada e grande esforço abdominal. Interromper se houver dor abdominal ou lombar.</p></div>${paMsg}
+          <p class="small" style="margin-top:8px"><span class="tag pra">Prática</span> Faixas extraídas da reabilitação cardiovascular. O valor de 160 mmHg é um alerta didático, não um corte de diretriz: siga o protocolo do serviço.</p>`;
+      };
+      root.querySelectorAll("input").forEach(i=>i.addEventListener("input",run)); run();
+    }
+  }
+};
+
+/* ====================== Jogos de classificação ====================== */
+const SORTS = {
+  risco: {
+    title:"Desafio: aumenta ou diminui o risco de AAA?",
+    intro:"Classifique cada fator e toque em Conferir.",
+    cats:["Aumenta","Diminui"],
+    items:[["Tabagismo",0],["Sexo masculino",0],["Diabetes",1],["Parente de 1º grau com AAA",0],["Idade avançada",0],["Hipertensão arterial",0]],
+    foot:"Fonte: USPSTF 2019, seção de avaliação de risco.", ok:"Fatores de risco dominados."
+  },
+  rotura: {
+    title:"Desafio: suspeita de rotura. Faz ou não faz?",
+    intro:"Seu paciente com AAA refere dor lombar súbita e está hipotenso. Para cada ação, escolha.",
+    cats:["Faz","Não faz"],
+    items:[["Deitar o paciente",0],["Sentar para aliviar a dor",1],["Acionar a equipe médica imediatamente",0],["Terapia manual na região lombar",1],["Monitorar PA, FC, SpO₂ e consciência",0],["Levar caminhando até o leito",1],["Registrar horário, sinais e conduta",0],["Esperar 15 minutos para reavaliar",1]],
+    foot:"Rotura é emergência: mortalidade de até cerca de 81% (USPSTF 2019).", ok:"Conduta de emergência correta."
+  },
+  virilha: {
+    title:"Desafio: o que você vê na virilha pós-EVAR?",
+    intro:"Para cada achado durante a mobilização, escolha a conduta.",
+    cats:["Emergência","Comunicar","Pode seguir"],
+    items:[["Pé frio, pálido, sem pulso distal",0],["Hematoma que cresce rapidamente, com sangramento",0],["Massa pulsátil com sopro na virilha",1],["Calor e secreção na incisão",1],["Febre baixa no 1º dia, sem outros sinais",1],["Pequeno hematoma estável, pulsos presentes",2],["Dor leve no local da punção ao andar",2]],
+    foot:"Massa pulsátil sugere pseudoaneurisma; febre isolada pode ser síndrome pós-implante. Siga o protocolo do serviço.", ok:"Olho clínico afiado."
+  },
+  mmii: {
+    title:"Desafio: pós-bypass de MMII",
+    intro:"Classifique cada achado no 2º dia pós-operatório.",
+    cats:["Emergência","Comunicar","Esperado"],
+    items:[["Dor desproporcional que piora com o estiramento passivo do pé",0],["Pé frio e sem pulso, antes presente",0],["Secreção purulenta na ferida",1],["Edema moderado na perna operada",2],["Dor incisional controlada com analgésico",2]],
+    foot:"Edema é frequente após bypass: elevar o membro e exercitar o tornozelo. Dor desproporcional é síndrome compartimental até prova em contrário.", ok:"Vigiar é intervir."
+  },
+  vf: {
+    title:"Verdadeiro ou falso",
+    intro:"Oito afirmações sobre a trilha inteira.",
+    cats:["Verdadeiro","Falso"],
+    items:[
+      ["A maioria dos AAA é sintomática antes de romper",1],
+      ["Mulheres têm maior risco de rotura que homens para o mesmo diâmetro",0],
+      ["A ESVS 2024 recomenda operar AAA de 5,0 cm em homens assintomáticos",1],
+      ["O EVAR exige seguimento por imagem a longo prazo",0],
+      ["Existe limite de carga em kg validado para o AAA não corrigido",1],
+      ["Dor que piora com o estiramento passivo do pé após bypass sugere síndrome compartimental",0],
+      ["Revascularização é recomendada na DAP assintomática",1],
+      ["No pós-EVAR, a deambulação costuma ser no mesmo dia ou no 1º dia",0]
+    ],
+    foot:"Errou alguma? Volte à estação correspondente antes do quiz final.", ok:"Pronto para o quiz final."
+  }
+};
+
+/* ====================== Cenários ====================== */
+const SCENARIOS = {
+  antonio: {
+    title:"Cenário: Seu Antônio quer voltar à academia",
+    lead:"Homem, 68 anos, ex-tabagista, hipertenso controlado, AAA infrarrenal de 4,6 cm, assintomático. Ele pergunta: “Posso voltar para a musculação?”",
+    opts:[
+      ["“Não. Só depois da cirurgia.”", false, "Não. A ESVS 2024 diz que restringir exercício no AAA pequeno não é indicado, e o descondicionamento piora o risco cirúrgico futuro."],
+      ["“Pode, com carga leve a moderada, sem prender o ar, com PA controlada e ultrassom anual.”", true, "Isso. Abaixo do limiar de 5,5 cm, sem cirurgia: exercício prescrito, sem Valsalva, e vigilância anual (4,0–4,9 cm em homem)."],
+      ["“Pode treinar como antes, o aneurisma é pequeno.”", false, "Não. O exercício é liberado, mas com prescrição: sem cargas máximas e sem Valsalva."],
+      ["“Pode, mas nunca acima de 10 kg.”", false, "Não existe limite em kg validado. O controle é a pressão arterial e a respiração."]
+    ]
+  },
+  jose: {
+    title:"Cenário: Sr. José, 1º dia após a cirurgia aberta",
+    lead:"70 anos, laparotomia, analgesia peridural, SpO₂ 92% em ar ambiente, murmúrio reduzido nas bases, hemodinamicamente estável. Por onde você começa?",
+    opts:[
+      ["Repouso no leito até retirar os drenos", false, "Não. A imobilidade aumenta atelectasia, íleo e delirium."],
+      ["Fisioterapia respiratória, tosse com proteção da incisão, sedestação e ortostatismo; marcha curta se tolerar", true, "Isso. SpO₂ 92% e murmúrio reduzido sugerem atelectasia. Pulmão + mobilização precoce, como no ERAS/SVS 2022."],
+      ["Treino resistido de MMII com carga", false, "Não é prioridade no 1º dia e aumenta o esforço abdominal."],
+      ["Só orientações de alta", false, "Cedo demais: o paciente ainda está em fase aguda."]
+    ]
+  },
+  c1: {
+    title:"Caso 1 · Seu Antônio",
+    lead:"68 anos, ex-tabagista (40 maços-ano), hipertenso controlado, AAA de 4,6 cm há 6 meses, assintomático. Qual a melhor conduta?",
+    opts:[
+      ["Contraindicar resistido até a cirurgia", false, "Errado: restringir exercício no AAA pequeno não é indicado (ESVS 2024)."],
+      ["Indicar cirurgia, pois passou de 4,5 cm", false, "Errado: em homens o limiar é 5,5 cm."],
+      ["Resistido leve a moderado sem Valsalva, aeróbio moderado, PA controlada, ultrassom anual", true, "Certo. Junta M2 (limiar e vigilância) e M4 (prescrição segura)."],
+      ["Treino livre, o AAA é pequeno", false, "Errado: precisa de prescrição, sem cargas máximas e sem Valsalva."]
+    ]
+  },
+  c2: {
+    title:"Caso 2 · Dona Lúcia",
+    lead:"72 anos, AAA de 5,2 cm aguardando cirurgia. Na sessão, refere dor lombar súbita e intensa, sudorese, PA 86/50 mmHg, FC 118 bpm. O que você faz?",
+    opts:[
+      ["Decúbito lateral e calor na lombar", false, "Errado: trata como lombalgia e atrasa a emergência."],
+      ["Interrompe, deita, não mobiliza, aciona a equipe e monitora", true, "Certo. Dor súbita + hipotensão + taquicardia em paciente com AAA = rotura até prova em contrário. E ela já estava acima do limiar feminino de 5,0 cm."],
+      ["Termina a sessão e registra no prontuário", false, "Errado: é emergência com mortalidade de até ~81%."],
+      ["Senta a paciente para aliviar a dor", false, "Errado: mobilizar piora o quadro."]
+    ]
+  },
+  c3: {
+    title:"Caso 3 · Dois pacientes no 1º dia pós-operatório",
+    lead:"Sr. José: cirurgia aberta, SpO₂ 92%, murmúrio reduzido nas bases. Sr. Carlos: EVAR bilateral, pequeno hematoma inguinal estável, pulsos presentes. Qual plano?",
+    opts:[
+      ["Ambos em repouso até o 3º dia", false, "Errado: a imobilidade aumenta as complicações nos dois."],
+      ["José: respiratória + sedestação/ortostatismo e marcha curta. Carlos: deambulação, vigiar hematoma e pulsos, evitar flexão vigorosa do quadril", true, "Certo. Junta M5 (pulmão e mobilização) e M6 (virilha e deambulação precoce)."],
+      ["Carlos no leito pelo hematoma; José deambula livremente", false, "Errado: inverte as prioridades. Hematoma pequeno e estável não impede a marcha."],
+      ["Ambos com resistido de MMII hoje", false, "Errado: não é prioridade e sobrecarrega o acesso femoral."]
+    ]
+  },
+  c4: {
+    title:"Caso 4 · Pós-bypass femoropoplíteo",
+    lead:"64 anos, diabético, 2º dia após bypass com safena. Edema moderado e dor intensa, desproporcional, que piora com o estiramento passivo do pé. O que fazer?",
+    opts:[
+      ["Elevar o membro e seguir com a marcha", false, "Errado: o edema é esperado, mas a dor desproporcional é sinal de alarme."],
+      ["Suspender a intervenção e acionar a equipe: suspeita de síndrome compartimental", true, "Certo. É emergência cirúrgica. Depois de resolvida, a trilha segue para caminhada supervisionada (ESC 2024)."],
+      ["Aplicar compressão elástica", false, "Errado: compressão piora a pressão no compartimento."],
+      ["Massagem de drenagem e reavaliar amanhã", false, "Errado: atrasar pode custar o membro."]
+    ]
+  }
+};
+
+/* ====================== Telas ====================== */
+const app = $("#app");
+function header(title, back){
+  const pct = Math.round(doneCount()/MODULES.length*100);
+  return `<header class="top"><div class="wrap">${back?`<button class="back" aria-label="Voltar" onclick="location.hash='#/'">‹</button>`:""}<div class="title">${esc(title)}</div><div class="prog">${doneCount()}/${MODULES.length} estações</div></div></header>`;
+}
+
+function renderHome(){
+  const d=doneCount(), pct=Math.round(d/MODULES.length*100);
+  const stations = MODULES.map(m=>{
+    const p=progress[m.id]||{}; const cls = p.quiz?"done":(p.visited?"started":"");
+    const chip = p.quiz ? `<span class="chip ok">Quiz: ${p.quiz.score}/${p.quiz.total}</span>` : `<span class="chip q">${m.quiz.length} perguntas</span>`;
+    const n = (m.blocks.filter(b=>b.t==="calc"||b.t==="sort"||b.t==="scenario").length);
+    return `<li><a class="station ${cls}" href="#/m/${m.id}"><div class="dot">${p.quiz?"✓":m.n}</div><div class="card"><h3>${esc(m.title)}</h3><p>${esc(m.sub)}</p><div class="chips">${n?`<span class="chip">${n} demonstraç${n>1?"ões":"ão"}</span>`:""}${chip}</div></div></a></li>`;
+  }).join("");
+  app.innerHTML = `
+  <section class="hero"><div class="wrap" style="padding-top:calc(18px + env(safe-area-inset-top))">
+    <span class="eyebrow">Além da aula · Trilha de aprendizagem</span>
+    <h1>Aorta abdominal: do aneurisma à reabilitação</h1>
+    <p>Sete missões, quatro casos e um desafio final. Tudo o que a turma pesquisou em aula, organizado para estudar.</p>
+    <svg class="aorta" viewBox="0 0 600 70" preserveAspectRatio="none" aria-hidden="true"><ellipse class="sac" cx="300" cy="35" rx="70" ry="26"/><path d="M0 27 H160 M175 27 V8 M160 27 H230 C255 27 260 9 300 9 C340 9 345 27 370 27 H500 L600 12"/><path d="M0 43 H160 M175 43 V62 M160 43 H230 C255 43 260 61 300 61 C340 61 345 43 370 43 H500 L600 58"/></svg>
+    <div class="bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>
+    <div class="barlabel">${d===MODULES.length?"Trilha concluída!":`${d} de ${MODULES.length} estações concluídas`}</div>
+    <div class="actions">
+      <a class="btn" href="#/m/casos">Casos clínicos</a>
+      <a class="btn ghost" href="#/sobre">Como usar offline</a>
+    </div>
+  </div></section>
+  <main><div class="wrap">
+    <h2>As nove estações</h2>
+    <ul class="trail">${stations}</ul>
+    ${d===MODULES.length?`<div class="block badge"><div class="medal" aria-hidden="true">🏅</div><h3>Trilha completa</h3><p>Você passou pelas nove estações. Seu Antônio segue treinando sem prender o ar, e Dona Lúcia foi operada a tempo.</p></div>`:""}
+    <div class="block links"><span class="kicker blue">Acesso rápido</span>
+      <a href="#/refs"><b>Fontes primárias</b><span class="s">${REFS.length} fontes ›</span></a>
+      <a href="#/m/final"><b>Desafio final</b><span class="s">V ou F + 10 questões ›</span></a><a href="https://doi.org/10.1016/j.ejvs.2023.11.002" target="_blank" rel="noopener"><b>Diretriz ESVS 2024 (aneurismas)</b><span class="net">internet</span></a>
+    </div>
+    <div class="block"><span class="kicker blue">Como ler as etiquetas</span><div class="legend"><span class="tag dir">Diretriz</span><span class="tag ens">Ensaio</span><span class="tag pra">Prática</span><span class="tag lac">Lacuna</span></div><p class="small" style="margin-top:8px">Diretriz ou consenso · ensaio clínico ou coorte · prática corrente, que varia entre serviços · sem evidência sólida.</p></div><p class="small">Material educativo para estudantes de Fisioterapia. Os casos são fictícios. Siga sempre o protocolo do serviço onde você atua.</p>
+  </div></main>
+  <footer>Prof.ª Dr.ª Séres Costa de Souza Nascimento · Fisioterapia nas Disfunções Angiológicas · 2026</footer>`;
+  window.scrollTo(0,0);
+}
+
+function renderModule(id){
+  const m = MODULES.find(x=>x.id===id); if(!m) return renderHome();
+  progress[m.id] = Object.assign({}, progress[m.id], {visited:true}); saveProgress();
+  const idx = MODULES.indexOf(m);
+  let html = header(`${m.n}. ${m.title}`, true) + `<main><div class="wrap"><h2 style="margin-top:6px">${esc(m.title)}</h2><p class="small" style="margin-top:-4px">${esc(m.sub)}</p>`;
+  m.blocks.forEach((b,i)=>{
+    if(b.t==="html") html += `<div class="block">${b.html}</div>`;
+    if(b.t==="calc") html += `<div class="block" data-calc="${b.id}"><span class="kicker blue">Demonstração</span><h3>${CALCS[b.id].title}</h3>${CALCS[b.id].html}</div>`;
+    if(b.t==="links") html += `<div class="block links"><span class="kicker blue">Links diretos</span>${b.items.map(l=>`<a href="${l.u}" target="_blank" rel="noopener"><span><b>${esc(l.t)}</b><br><span class="s">${esc(l.s)}</span></span><span class="net">internet</span></a>`).join("")}</div>`;
+    if(b.t==="sort") html += `<div class="block" data-sort="${b.id}"></div>`;
+    if(b.t==="scenario") html += `<div class="block" data-scen="${b.id}"></div>`;
+  });
+  html += `<div class="block" id="quiz"></div>`;
+  html += `<div class="navbtns">${idx>0?`<a class="btn light small" href="#/m/${MODULES[idx-1].id}">‹ ${esc(MODULES[idx-1].title)}</a>`:`<a class="btn light small" href="#/">‹ Início</a>`}${idx<MODULES.length-1?`<a class="btn small" href="#/m/${MODULES[idx+1].id}">${esc(MODULES[idx+1].title)} ›</a>`:`<a class="btn small" href="#/">Concluir ›</a>`}</div>`;
+  html += `</div></main>`;
+  app.innerHTML = html;
+  app.querySelectorAll("[data-calc]").forEach(el=>CALCS[el.dataset.calc].init(el));
+  app.querySelectorAll("[data-sort]").forEach(el=>mountSort(el, SORTS[el.dataset.sort]));
+  app.querySelectorAll("[data-scen]").forEach(el=>mountScenario(el, SCENARIOS[el.dataset.scen]));
+  mountQuiz($("#quiz"), m);
+  window.scrollTo(0,0);
+}
+
+function mountSort(el, s){
+  const choice = s.items.map(()=>null);
+  el.innerHTML = `<span class="kicker blue">Demonstração</span><h3>${s.title}</h3><p>${s.intro}</p>` +
+    s.items.map((it,i)=>`<div class="sortitem" data-i="${i}"><div>${esc(it[0])}</div><div class="seg">${s.cats.map((c,j)=>`<button data-j="${j}" aria-pressed="false">${c}</button>`).join("")}</div></div>`).join("") +
+    `<button class="btn" style="width:100%;margin-top:6px" id="sortCheck">Conferir</button><div id="sortRes" style="margin-top:10px"></div><p class="small" style="margin-top:8px">${s.foot}</p>`;
+  el.querySelectorAll(".sortitem").forEach(row=>{
+    const i=+row.dataset.i;
+    row.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+      row.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));
+      b.setAttribute("aria-pressed","true"); choice[i]=+b.dataset.j; row.classList.remove("right","wrong");
+    }));
+  });
+  $("#sortCheck",el).addEventListener("click",()=>{
+    if(choice.some(c=>c===null)){ toast("Classifique todas as situações"); return; }
+    let ok=0;
+    el.querySelectorAll(".sortitem").forEach(row=>{ const i=+row.dataset.i; const r=choice[i]===s.items[i][1]; if(r) ok++; row.classList.toggle("right",r); row.classList.toggle("wrong",!r);
+      if(!r && !row.querySelector(".fix")){ const f=document.createElement("div"); f.className="small fix"; f.textContent="Resposta: "+s.cats[s.items[i][1]]; row.appendChild(f);} });
+    $("#sortRes",el).innerHTML=`<div class="fb ${ok===s.items.length?"ok":"bad"}"><b>${ok} de ${s.items.length} certas.</b> ${ok===s.items.length?s.ok:"Revise as marcadas em vermelho."}</div>`;
+  });
+}
+
+function mountScenario(el, s){
+  el.innerHTML = `<span class="kicker blue">Demonstração · decisão clínica</span><h3>${s.title}</h3><p>${s.lead}</p><div class="opts">${s.opts.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o[0])}</button>`).join("")}</div><div class="scfb"></div>`;
+  el.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+    const o=s.opts[+b.dataset.i];
+    el.querySelectorAll(".opt").forEach(x=>x.classList.remove("right","wrong"));
+    b.classList.add(o[1]?"right":"wrong");
+    $(".scfb",el).innerHTML=`<div class="fb ${o[1]?"ok":"bad"}">${o[2]}</div>`;
+  }));
+}
+
+function mountQuiz(el, m){
+  let i=0, score=0;
+  const prev = progress[m.id] && progress[m.id].quiz;
+  function intro(){
+    el.innerHTML = `<span class="kicker">Quiz da estação</span><h3>${m.quiz.length} perguntas</h3>${prev?`<p>Seu último resultado: <b>${prev.score}/${prev.total}</b>.</p>`:"<p>Teste o que ficou desta estação.</p>"}<button class="btn" style="width:100%" id="qStart">${prev?"Refazer o quiz":"Começar o quiz"}</button>`;
+    $("#qStart",el).addEventListener("click",()=>{ i=0; score=0; show(); });
+  }
+  function show(){
+    const q=m.quiz[i];
+    el.innerHTML = `<div class="qhead"><span>Pergunta ${i+1} de ${m.quiz.length}</span><span>${score} acerto${score===1?"":"s"}</span></div>
+      <div class="qtext">${esc(q.q)}</div><div class="opts">${q.o.map((o,j)=>`<button class="opt" data-j="${j}">${esc(o)}</button>`).join("")}</div><div class="qfb"></div>`;
+    el.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>{
+      const j=+b.dataset.j, r=j===q.a; if(r) score++;
+      el.querySelectorAll(".opt").forEach((x,k)=>{ x.disabled=true; if(k===q.a) x.classList.add("right"); });
+      if(!r) b.classList.add("wrong");
+      $(".qfb",el).innerHTML=`<div class="fb ${r?"ok":"bad"}"><b>${r?"Isso.":"Não exatamente."}</b> ${esc(q.e)}</div>
+        <button class="btn" style="width:100%;margin-top:10px" id="qNext">${i<m.quiz.length-1?"Próxima":"Ver resultado"}</button>`;
+      $("#qNext",el).addEventListener("click",()=>{ i++; if(i<m.quiz.length) show(); else finish(); });
+      $("#qNext",el).focus({preventScroll:true});
+    }));
+  }
+  function finish(){
+    progress[m.id] = Object.assign({}, progress[m.id], {quiz:{score, total:m.quiz.length}}); saveProgress();
+    const all = doneCount()===MODULES.length;
+    el.innerHTML = `<div class="badge"><div class="medal" aria-hidden="true">${score===m.quiz.length?"🏅":"✓"}</div><h3>${score} de ${m.quiz.length}</h3><p>${score===m.quiz.length?"Estação dominada.":"Estação concluída. Releia os pontos que errou e refaça quando quiser."}</p>${all?"<p><b>Você completou a trilha inteira!</b></p>":""}<button class="btn light" style="width:100%" id="qAgain">Refazer</button></div>`;
+    $("#qAgain",el).addEventListener("click",()=>{ i=0; score=0; show(); });
+    const t=$(".top .prog"); if(t) t.textContent=`${doneCount()}/${MODULES.length} estações`;
+  }
+  intro();
+}
+
+function renderRefs(){
+  app.innerHTML = header("Referências", true) + `<main><div class="wrap"><h2 style="margin-top:6px">Fontes primárias</h2>
+  <p class="small">Os links abrem a diretriz ou o artigo original e precisam de internet.</p>
+  <div class="block links">${REFS.map(r=>`<a href="${r.u}" target="_blank" rel="noopener"><span>${esc(r.t)}</span><span class="net">internet</span></a>`).join("")}</div>
+  <a class="btn light" href="#/">‹ Voltar à trilha</a></div></main>`;
+  window.scrollTo(0,0);
+}
+
+function renderAbout(){
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  app.innerHTML = header("Como usar offline", true) + `<main><div class="wrap"><h2 style="margin-top:6px">Leve a trilha no bolso</h2>
+  <div class="block"><span class="kicker">Funciona sem internet</span>
+    <p>Depois que você abre esta página uma vez com internet, a trilha, os simuladores, os jogos e os quizzes ficam guardados no seu celular e funcionam offline.</p>
+    <p class="small">Só os links das diretrizes e artigos precisam de conexão.</p></div>
+  <div class="block"><span class="kicker">Instale na tela inicial</span>
+    ${ios?`<ol class="steps"><li>No Safari, toque em <b>Compartilhar</b> (quadrado com seta).</li><li>Escolha <b>Adicionar à Tela de Início</b>.</li><li>Toque em <b>Adicionar</b>.</li></ol>`:
+    `<ol class="steps"><li>No Chrome, toque nos <b>três pontinhos</b>.</li><li>Escolha <b>Instalar app</b> ou <b>Adicionar à tela inicial</b>.</li><li>Confirme.</li></ol>`}
+    <button class="btn" style="width:100%;display:none" id="installBtn">Instalar agora</button></div>
+  <div class="block"><span class="kicker">Seu progresso</span><p>Fica salvo só neste aparelho.</p><button class="btn light" style="width:100%" id="resetBtn">Recomeçar a trilha</button></div>
+  <a class="btn light" href="#/">‹ Voltar à trilha</a></div></main>`;
+  if(deferredPrompt){ const b=$("#installBtn"); b.style.display="flex"; b.addEventListener("click", async()=>{ deferredPrompt.prompt(); deferredPrompt=null; b.style.display="none"; }); }
+  $("#resetBtn").addEventListener("click",()=>{ progress={}; saveProgress(); toast("Progresso apagado"); });
+  window.scrollTo(0,0);
+}
+
+let deferredPrompt=null;
+window.addEventListener("beforeinstallprompt", e=>{ e.preventDefault(); deferredPrompt=e; });
+
+function route(){
+  const h = location.hash || "#/";
+  if(h.startsWith("#/m/")) return renderModule(h.slice(4));
+  if(h==="#/refs") return renderRefs();
+  if(h==="#/sobre") return renderAbout();
+  renderHome();
+}
+window.addEventListener("hashchange", route);
+route();
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load", ()=>{ navigator.serviceWorker.register("sw.js").catch(()=>{}); });
+}
+</script>
+</body>
+</html>
